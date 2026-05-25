@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>每日饮食打卡</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- 1. 登录 -->
+  <section id="page-login" class="page active">
+    <div class="login-page">
+      <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:20px;border:4px solid white">
+      <div class="login-card">
+        <h1>每日饮食打卡</h1>
+        <p class="sub">记录三餐 · 追踪指标 · 分享坚持</p>
+        <form id="login-form">
+          <input type="text" id="login-name" placeholder="你的昵称" required>
+          <input type="password" placeholder="密码（任意）" required>
+          <button type="submit" class="btn">登录</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 首页 - 每日指标 -->
+  <section id="page-home" class="page">
+    <div class="app-shell">
+      <div class="app-header">
+        <h2>今日饮食</h2>
+        <p id="header-date"></p>
+      </div>
+      <div class="app-body">
+        <div id="checkin-status" class="status pending">⏳ 待完成今日打卡</div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="label">热量摄入</div>
+            <div class="value" id="m-cal">0 / 1800 千卡</div>
+            <div class="progress"><div class="fill" id="bar-cal" style="width:0%"></div></div>
+          </div>
+          <div class="metric-card">
+            <div class="label">饮水量</div>
+            <div class="value" id="m-water">0 / 2000 ml</div>
+            <div class="progress"><div class="fill" id="bar-water" style="width:0%"></div></div>
+          </div>
+          <div class="metric-card">
+            <div class="label">蛋白质</div>
+            <div class="value" id="m-protein">0 / 75 g</div>
+            <div class="progress"><div class="fill" id="bar-protein" style="width:0%"></div></div>
+          </div>
+          <div class="metric-card">
+            <div class="label">连续打卡</div>
+            <div class="value" id="m-streak">0 天</div>
+            <div class="progress"><div class="fill" style="width:100%;background:var(--green)"></div></div>
+          </div>
+        </div>
+        <h3 class="section-title">三餐打卡</h3>
+        <div class="meal-btns" id="meal-checklist"></div>
+        <h3 class="section-title">快捷饮水</h3>
+        <div class="water-btns">
+          <button type="button" data-add-water="250">+250ml</button>
+          <button type="button" data-add-water="500">+500ml</button>
+          <button type="button" data-add-water="200">+200ml</button>
+        </div>
+        <button type="button" class="btn" id="btn-daily-checkin">完成今日打卡</button>
+      </div>
+      <nav class="bottom-nav">
+        <span class="tab-item active" data-nav="home"><span class="icon">🏠</span>首页</span>
+        <span class="tab-item" data-nav="foods"><span class="icon">🥗</span>推荐</span>
+        <span class="tab-item" data-nav="interact"><span class="icon">💬</span>互动</span>
+        <span class="tab-item" data-nav="share"><span class="icon">📤</span>分享</span>
+        <span class="tab-item" data-nav="profile"><span class="icon">👤</span>我的</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 3. 食品推荐 -->
+  <section id="page-foods" class="page">
+    <div class="app-shell">
+      <div class="app-header"><h2>食品推荐</h2><p>健康低卡，一键加入今日记录</p></div>
+      <div class="app-body" id="food-rec-grid"></div>
+      <nav class="bottom-nav">
+        <span class="tab-item" data-nav="home"><span class="icon">🏠</span>首页</span>
+        <span class="tab-item active" data-nav="foods"><span class="icon">🥗</span>推荐</span>
+        <span class="tab-item" data-nav="interact"><span class="icon">💬</span>互动</span>
+        <span class="tab-item" data-nav="share"><span class="icon">📤</span>分享</span>
+        <span class="tab-item" data-nav="profile"><span class="icon">👤</span>我的</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 4. 互动 -->
+  <section id="page-interact" class="page">
+    <div class="app-shell">
+      <div class="app-header"><h2>互动社区</h2><p>分享打卡心得，互相鼓励</p></div>
+      <div class="app-body">
+        <div class="post-box">
+          <textarea id="post-input" placeholder="分享你的饮食打卡..."></textarea>
+          <button type="button" class="btn" id="btn-post" style="margin-top:10px">发布动态</button>
+        </div>
+        <h3 class="section-title">大家动态</h3>
+        <div id="feed-list"></div>
+      </div>
+      <nav class="bottom-nav">
+        <span class="tab-item" data-nav="home"><span class="icon">🏠</span>首页</span>
+        <span class="tab-item" data-nav="foods"><span class="icon">🥗</span>推荐</span>
+        <span class="tab-item active" data-nav="interact"><span class="icon">💬</span>互动</span>
+        <span class="tab-item" data-nav="share"><span class="icon">📤</span>分享</span>
+        <span class="tab-item" data-nav="profile"><span class="icon">👤</span>我的</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 5. 分享 -->
+  <section id="page-share" class="page">
+    <div class="app-shell">
+      <div class="app-header"><h2>分享打卡</h2><p>复制文案分享到微信、朋友圈</p></div>
+      <div class="app-body" id="share-cards"></div>
+      <nav class="bottom-nav">
+        <span class="tab-item" data-nav="home"><span class="icon">🏠</span>首页</span>
+        <span class="tab-item" data-nav="foods"><span class="icon">🥗</span>推荐</span>
+        <span class="tab-item" data-nav="interact"><span class="icon">💬</span>互动</span>
+        <span class="tab-item active" data-nav="share"><span class="icon">📤</span>分享</span>
+        <span class="tab-item" data-nav="profile"><span class="icon">👤</span>我的</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 6. 个人 -->
+  <section id="page-profile" class="page">
+    <div class="app-shell">
+      <div class="app-header"><h2>个人中心</h2><p>我的打卡数据</p></div>
+      <div class="app-body">
+        <div class="profile-hero">
+          <div class="avatar">😊</div>
+          <h2 id="pf-name">用户</h2>
+          <div class="stat-row">
+            <div><strong id="pf-streak">0</strong>连续打卡</div>
+            <div><strong id="pf-total">0</strong>累计打卡</div>
+          </div>
+        </div>
+        <ul class="info-list">
+          <li>今日已打卡餐次：<span id="pf-today-meals">暂无</span></li>
+          <li>今日热量摄入：<span id="pf-today-cal">0</span></li>
+          <li data-nav="home" style="color:var(--primary);cursor:pointer">→ 返回首页继续打卡</li>
+          <li data-nav="login" style="color:var(--muted);cursor:pointer">退出登录</li>
+        </ul>
+      </div>
+      <nav class="bottom-nav">
+        <span class="tab-item" data-nav="home"><span class="icon">🏠</span>首页</span>
+        <span class="tab-item" data-nav="foods"><span class="icon">🥗</span>推荐</span>
+        <span class="tab-item" data-nav="interact"><span class="icon">💬</span>互动</span>
+        <span class="tab-item" data-nav="share"><span class="icon">📤</span>分享</span>
+        <span class="tab-item active" data-nav="profile"><span class="icon">👤</span>我的</span>
+      </nav>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('header-date').textContent =
+      new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  </script>
+</body>
+</html>
