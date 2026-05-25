@@ -1,0 +1,151 @@
+:root {
+  --primary: #f97316;
+  --primary-dark: #ea580c;
+  --bg: #fff7ed;
+  --card: #fff;
+  --text: #431407;
+  --muted: #78716c;
+  --green: #22c55e;
+  --radius: 14px;
+  --shadow: 0 4px 16px rgba(249, 115, 22, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); }
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+[data-nav], [data-check-meal], [data-add-water], [data-add-rec], [data-like-post], [data-share] { cursor: pointer; }
+
+/* 登录 */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #fb923c, #f97316, #fdba74);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  background: var(--card); padding: 36px; border-radius: 20px;
+  width: 100%; max-width: 380px; box-shadow: var(--shadow);
+}
+.login-card h1 { font-size: 24px; color: var(--primary-dark); margin-bottom: 8px; }
+.login-card .sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+.login-card input {
+  width: 100%; padding: 14px; margin-bottom: 12px;
+  border: 1px solid #fed7aa; border-radius: 10px; font-size: 15px;
+}
+.login-card input:focus { outline: none; border-color: var(--primary); }
+.btn {
+  width: 100%; padding: 14px; border: none; border-radius: 10px;
+  background: var(--primary); color: white; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+.btn:hover { background: var(--primary-dark); }
+.btn-sm {
+  padding: 8px 14px; border: none; border-radius: 8px;
+  background: var(--primary); color: white; font-size: 13px; cursor: pointer; margin-top: 10px;
+}
+
+/* App 壳 */
+.app-shell { padding-bottom: 72px; min-height: 100vh; }
+.app-header {
+  background: linear-gradient(135deg, var(--primary), #fb923c);
+  color: white; padding: 20px 20px 28px; border-radius: 0 0 24px 24px;
+}
+.app-header h2 { font-size: 20px; }
+.app-header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+.app-body { padding: 20px; max-width: 480px; margin: 0 auto; }
+
+/* 底部导航 */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--card); border-top: 1px solid #fed7aa;
+  display: flex; justify-content: space-around; padding: 10px 0;
+  max-width: 480px; margin: 0 auto; z-index: 100;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+}
+.tab-item {
+  display: flex; flex-direction: column; align-items: center;
+  font-size: 11px; color: var(--muted); padding: 4px 8px;
+}
+.tab-item.active { color: var(--primary); font-weight: 600; }
+.tab-item .icon { font-size: 22px; margin-bottom: 2px; }
+
+/* 指标卡片 */
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.metric-card {
+  background: var(--card); border-radius: var(--radius); padding: 16px;
+  box-shadow: var(--shadow);
+}
+.metric-card .label { font-size: 12px; color: var(--muted); }
+.metric-card .value { font-size: 15px; font-weight: 700; margin: 8px 0; }
+.progress { height: 8px; background: #ffedd5; border-radius: 4px; overflow: hidden; }
+.progress .fill { height: 100%; background: linear-gradient(90deg, var(--primary), #fb923c); border-radius: 4px; transition: width 0.3s; }
+
+.status { display: inline-block; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+.status.pending { background: #fef3c7; color: #b45309; }
+.status.done { background: #dcfce7; color: #166534; }
+
+.section-title { font-size: 16px; margin: 20px 0 12px; }
+.meal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.meal-btn {
+  padding: 14px; border: 2px solid #fed7aa; border-radius: 12px;
+  background: var(--card); font-size: 14px; cursor: pointer;
+}
+.meal-btn.done { border-color: var(--green); background: #f0fdf4; color: #166534; }
+.water-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.water-btns button {
+  padding: 10px 16px; border: 1px solid #fed7aa; border-radius: 10px;
+  background: var(--card); cursor: pointer; font-size: 13px;
+}
+
+/* 食品推荐 */
+.rec-card {
+  background: var(--card); border-radius: var(--radius); overflow: hidden;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.rec-card img { width: 100%; height: 160px; object-fit: cover; }
+.rec-body { padding: 16px; }
+.rec-body .tag { font-size: 11px; background: #ffedd5; color: var(--primary-dark); padding: 4px 8px; border-radius: 6px; }
+.rec-body h3 { margin: 8px 0 4px; font-size: 17px; }
+.rec-body .cal { color: var(--primary); font-weight: 700; }
+.rec-body .tip { font-size: 13px; color: var(--muted); margin: 8px 0; }
+
+/* 个人 */
+.profile-hero {
+  text-align: center; background: var(--card); border-radius: var(--radius);
+  padding: 28px; box-shadow: var(--shadow); margin-bottom: 20px;
+}
+.profile-hero .avatar { font-size: 56px; margin-bottom: 12px; }
+.stat-row {
+  display: flex; justify-content: space-around; margin-top: 20px;
+  padding-top: 20px; border-top: 1px solid #ffedd5;
+}
+.stat-row div { text-align: center; }
+.stat-row strong { display: block; font-size: 22px; color: var(--primary); }
+.info-list { background: var(--card); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+.info-list li { padding: 12px 0; border-bottom: 1px solid #ffedd5; font-size: 14px; list-style: none; }
+.info-list li:last-child { border: none; }
+
+/* 互动 */
+.post-box { margin-bottom: 16px; }
+.post-box textarea {
+  width: 100%; padding: 12px; border: 1px solid #fed7aa; border-radius: 12px;
+  resize: vertical; min-height: 80px; font-family: inherit;
+}
+.feed-card {
+  background: var(--card); border-radius: var(--radius); padding: 16px;
+  margin-bottom: 12px; box-shadow: var(--shadow);
+}
+.feed-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.feed-head .av { font-size: 24px; }
+.feed-head .time { margin-left: auto; font-size: 12px; color: var(--muted); }
+.like-btn { margin-top: 10px; padding: 6px 12px; border: 1px solid #fed7aa; border-radius: 8px; background: #fff; cursor: pointer; }
+.like-btn.liked { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+
+/* 分享 */
+.share-card {
+  background: var(--card); border-radius: var(--radius); padding: 20px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.share-card h3 { margin-bottom: 8px; }
+.share-data { font-size: 13px; color: var(--muted); margin: 12px 0; }
+.share-card .btn { margin-top: 8px; width: auto; padding: 10px 20px; }
